@@ -1,51 +1,44 @@
-name: Deploy gareaulajoie preview
+name: Materialize gareaulajoie preview
 
 on:
   push:
     branches: [main]
+    paths:
+      - ".github/workflows/deploy-preview.yml"
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: true
+  contents: write
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  materialize:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+
       - name: Download validated preview artifact
         shell: bash
         run: |
           set -euo pipefail
-          curl --fail --location --silent --show-error 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-dab4-81f7-8098-2305bcedd62b/raw?se=2026-08-14T11%3A05%3A33Z&sp=r&sv=2026-02-06&sr=b&scid=fc7b9ba0-f542-5c52-be5a-305eb4d1a099&skoid=add8ee7d-5fc7-451e-b06e-a82b2276cf62&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-08-14T11%3A00%3A31Z&ske=2026-08-15T11%3A00%3A31Z&sks=b&skv=2026-02-06&sig=/VxN%2BbzhHoPuB9BTcbt92nENpjjewwRUugWHQaqcFr0%3D' -o preview.zip
-          mkdir site
-          unzip -q preview.zip -d site
-          test -f site/index.html
-          test -f site/en/index.html
-          test -f site/llms.txt
-          test -f site/authority/index.html
-          test -f site/piliers/index.html
-          printf 'User-agent: *\nDisallow: /\n' > site/robots.txt
-          touch site/.nojekyll
+          curl --fail --location --silent --show-error 'https://sdmntprwestcentralus.oaiusercontent.com/files/00000000-326c-81fb-b0a3-fabc8e4a1535/raw?se=2026-08-14T11%3A07%3A04Z&sp=r&sv=2026-02-06&sr=b&scid=fe07f305-7bd8-5636-9aee-88e05d453703&skoid=add8ee7d-5fc7-451e-b06e-a82b2276cf62&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-08-13T18%3A43%3A05Z&ske=2026-08-14T18%3A43%3A05Z&sks=b&skv=2026-02-06&sig=28Bdqd%2BiMDFlx4ry7mTSOJBkZF11igM2jodB6zFk00Y%3D' -o preview.zip
+          rm -rf docs
+          mkdir docs
+          unzip -q preview.zip -d docs
+          test -f docs/index.html
+          test -f docs/en/index.html
+          test -f docs/llms.txt
+          test -f docs/authority/index.html
+          test -f docs/piliers/index.html
+          printf 'User-agent: *\nDisallow: /\n' > docs/robots.txt
+          touch docs/.nojekyll
 
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v4
-        with:
-          path: site
-
-      - name: Deploy preview
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Commit static preview
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A docs
+          git commit -m "Materialize validated static preview"
+          git push
