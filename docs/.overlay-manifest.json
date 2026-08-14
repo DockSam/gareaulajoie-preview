@@ -1,0 +1,40 @@
+{
+  "strategy": "additive-overlay",
+  "preserve_exact": [
+    "/",
+    "/en"
+  ],
+  "intentionally_omitted": [
+    "/index.html",
+    "/en/**",
+    "/robots.txt",
+    "/sitemap.xml",
+    "/sitemap-index.xml",
+    "/_scripts/**",
+    "/_deploy/**",
+    "/_screens/**",
+    "/uploads/**",
+    "/journal-pipeline/**"
+  ],
+  "added_root_files": [
+    "/llms.txt",
+    "/.well-known/llms.txt",
+    "/sitemap-authority.xml",
+    "/rss-authority.xml"
+  ],
+  "asset_namespace": "/authority-assets/",
+  "content_roots": [
+    "/about/",
+    "/talks/",
+    "/piliers/",
+    "/research/",
+    "/authority/",
+    "/selected-appearances/",
+    "/media-kit/",
+    "/podcasts/",
+    "/projects/",
+    "/credentials/",
+    "/publications/",
+    "/answer-objects/"
+  ]
+}
