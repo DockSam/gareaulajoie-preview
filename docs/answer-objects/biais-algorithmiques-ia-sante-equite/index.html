@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+
+<html data-depth="2" data-lang="fr" lang="fr">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Quels sont les biais algorithmiques en IA santé et comment affectent-ils l'équité des soins ? — Samuel Gareau-Lajoie</title>
+<meta content="Biais algorithmiques en IA clinique — sources, exemples documentés, impact sur l'équité des soins, et mesures pour les détecter et les atténuer." name="description"/>
+<link href="https://gareaulajoie.ca/answer-objects/biais-algorithmiques-ia-sante-equite/" rel="canonical"/>
+
+
+<meta content="Quels sont les biais algorithmiques en IA santé et comment affectent-ils l'équité des soins ? — Samuel Gareau-Lajoie" property="og:title"/>
+<meta content="Biais algorithmiques en IA clinique — sources, exemples documentés, impact sur l'équité des soins, et mesures pour les détecter et les atténuer." property="og:description"/>
+<meta content="https://gareaulajoie.ca/answer-objects/biais-algorithmiques-ia-sante-equite/" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="fr_CA" property="og:locale"/>
+<meta content="Samuel Gareau-Lajoie, MD" property="og:site_name"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Quels sont les biais algorithmiques en IA santé et comment affectent-ils l'équité des soins ? — Samuel Gareau-Lajoie" name="twitter:title"/>
+<meta content="Biais algorithmiques en IA clinique — sources, exemples documentés, impact sur l'équité des soins, et mesures pour les détecter et les atténuer." name="twitter:description"/>
+<link href="https://gareaulajoie.ca/answer-objects/biais-algorithmiques-ia-sante-equite/" hreflang="fr" rel="alternate"/>
+<link href="https://gareaulajoie.ca/answer-objects/biais-algorithmiques-ia-sante-equite/" hreflang="en" rel="alternate"/>
+<link href="https://gareaulajoie.ca/answer-objects/biais-algorithmiques-ia-sante-equite/" hreflang="x-default" rel="alternate"/>
+</head><body>
+<div id="header-slot"></div>
+<main>
+<section class="page-hero">
+<div class="container">
+<div class="breadcrumb">
+<a href="/gareaulajoie-ca/"><span data-lang="fr">Accueil</span><span data-lang="en">Home</span></a>
+<span class="sep">/</span>
+<a href="../../answer-objects/index.html"><span data-lang="fr">Réponses cliniques</span><span data-lang="en">Clinical answers</span></a>
+<span class="sep">/</span>
+<span class="here">Quels sont les biais algorithmiques en IA santé et comment a…</span>
+</div>
+<div class="eyebrow">
+Réponse clinique —
+<a href="../../piliers/audit-clinique-ia/index.html" style="color: inherit;"> Évaluation clinique IA </a> </div>
+<h1>Quels sont les biais algorithmiques en IA santé et comment affectent-ils l'équité des soins ?</h1>
+<p class="description">Biais algorithmiques en IA clinique — sources, exemples documentés, impact sur l'équité des soins, et mesures pour les détecter et les atténuer.</p>
+<div class="meta">
+<span><strong data-lang="fr">Publié le</strong><strong data-lang="en">Published</strong> 30 novembre 2025</span>
+<span><span data-lang="fr">Auteur :</span><span data-lang="en">Author:</span> <strong>Samuel Gareau-Lajoie, MD</strong></span>
+</div>
+</div>
+</section>
+<div class="article-layout">
+<aside class="article-toc">
+<div class="toc-label"><span data-lang="fr">Sur cette page</span><span data-lang="en">On this page</span></div>
+<ul><li><a href="#nuance-clinique">Nuance clinique</a></li><li><a href="#points-pratiques">Points pratiques</a></li><li><a href="#preuves-et-contexte-public">Preuves et contexte public</a></li></ul>
+</aside>
+<article class="article">
+<div class="lead-answer"><div class="lead-answer-label"><span data-lang="fr">Réponse courte</span><span data-lang="en">Short answer</span></div><p>L'INESSS (rapport IA en imagerie medicale, 2025) signale les risques lies aux biais algorithmiques et a la variabilite des performances selon les populations. L'Organisation mondiale de la Sante (OMS) recommande que l'equite soit un critere fondamental dans l'evaluation des outils d'IA en sante.</p></div>
+<h2 class="section-h" data-n="01" id="nuance-clinique">Nuance clinique</h2>
+<p>Les biais algorithmiques en santé sont particulièrement insidieux parce qu’ils se présentent souvent avec une apparence de précision mathématique. Un médecin qui reçoit un résultat d’outil IA suivi d’un chiffre de confiance (« 87 % ») peut inconsciemment lui accorder une autorité qu’une opinion clinique équivalente n’obtiendrait pas. La lutte contre le biais algorithmique n’est pas seulement une question technique — c’est une question de littératie clinique et d’épistémologie médicale.</p>
+<h2 class="section-h" data-n="02" id="points-pratiques">Points pratiques</h2>
+<p><strong>Sources de biais fréquentes :</strong></p>
+<ul>
+<li><strong>Biais de représentation</strong> : données d’entraînement issues de populations non représentatives (ex: majorité de patients blancs, anglophones, urbains)</li>
+<li><strong>Biais de mesure</strong> : variables proxy défectueuses (coût des soins, accès aux services comme substituts de l’état de santé)</li>
+<li><strong>Biais de confirmation</strong> : l’IA reproduit les décisions historiques des médecins, y compris leurs propres biais documentés</li>
+<li><strong>Biais de déploiement</strong> : performance validée dans un contexte, dégradée dans un autre sans recalibration</li>
+</ul>
+<p><strong>Exemples documentés :</strong></p>
+<ul>
+<li>Algorithme de priorisation des soins (Obermeyer et al., 2019) — sous-estimation des besoins des patients Noirs</li>
+<li>Outils de détection de mélanome — performance réduite sur les peaux foncées dans plusieurs études</li>
+<li>Modèles de prédiction de sepsis — performance variable selon les établissements de validation externe</li>
+</ul>
+<p><strong>Ce que le clinicien peut faire :</strong></p>
+<ul>
+<li>Demander aux fournisseurs d’IA : sur quelle population a été validé cet outil ? En sous-groupes ?</li>
+<li>Ne pas extrapoler les performances publiées à sa propre population sans validation locale</li>
+<li>Maintenir un regard critique sur les patients pour lesquels l’outil semble « trop confiant »</li>
+<li>Signaler les cas suspects d’erreur systématique — c’est une donnée précieuse pour améliorer les outils</li>
+</ul>
+<h2 class="section-h" data-n="03" id="preuves-et-contexte-public">Preuves et contexte public</h2>
+<ul>
+<li><a href="../../answer-objects/comment-evaluer-scribe-ia-medecine-famille/index.html">Comment évaluer la fiabilité d’un outil IA clinique ?</a></li>
+<li><a href="../../piliers/audit-clinique-ia/index.html">Évaluation clinique de l’IA — pilier</a></li>
+</ul>
+<div class="grid-label">Pour aller plus loin</div><div class="related-grid"><a class="related-card" href="../../answer-objects/difference-ia-faible-forte-en-sante/index.html"><div class="rc-kicker">Question · FAQ</div><div class="rc-title">Quelle est la différence entre IA faible et IA forte en santé ?</div></a><a class="related-card" href="../../piliers/gouvernance-ia-sante-quebec/index.html"><div class="rc-kicker">Pilier</div><div class="rc-title">Gouvernance IA santé au Québec — pilier</div></a></div>
+<div class="external-sources" style="margin-top:2rem;padding:1.25rem 1.5rem;border:1px solid var(--border, #e0e0e0);border-radius:8px;background:var(--surface-2, #fafafa);">
+<h3 style="margin-top:0;font-size:1rem;"><span data-lang="fr">Sources institutionnelles</span><span data-lang="en">Institutional sources</span></h3>
+<ul>
+<li><a href="https://www.inesss.qc.ca" rel="noopener" target="_blank">INESSS - Biais algorithmiques en imagerie medicale</a></li>
+<li><a href="https://www.who.int/health-topics/artificial-intelligence" rel="noopener" target="_blank">OMS - Equite et IA en sante</a></li>
+</ul>
+</div>
+<div class="disclosure"><strong data-lang="fr">Disclosure.</strong><strong data-lang="en">Disclosure.</strong> Samuel Gareau-Lajoie est cofondateur de Vetted Medical. Cette réponse est éducative et ne constitue pas un avis légal ou réglementaire.</div>
+</article>
+</div>
+</main>
+<div id="footer-slot"></div>
+<script src="/gareaulajoie-ca/authority-assets/partials.js"></script>
+<script src="/gareaulajoie-ca/authority-assets/site.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "Quels sont les biais algorithmiques en IA santé et comment affectent-ils l'équité des soins ?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "L'INESSS (rapport IA en imagerie medicale, 2025) signale les risques lies aux biais algorithmiques et a la variabilite des performances selon les populations. L'Organisation mondiale de la Sante (OMS) recommande que l'equite soit un critere fondamental dans l'evaluation des outils d'IA en sante.",
+      "author": {
+        "@type": "Person",
+        "@id": "https://gareaulajoie.ca/#samuel-gareau-lajoie",
+        "name": "Samuel Gareau-Lajoie"
+      }
+    }
+  }],
+  "author": {
+    "@type": "Person",
+    "@id": "https://gareaulajoie.ca/#samuel-gareau-lajoie",
+    "name": "Samuel Gareau-Lajoie"
+  },
+  "url": "https://gareaulajoie.ca/answer-objects/biais-algorithmiques-ia-sante-equite/",
+  "inLanguage": "fr"
+}
+</script>
+</body></html>

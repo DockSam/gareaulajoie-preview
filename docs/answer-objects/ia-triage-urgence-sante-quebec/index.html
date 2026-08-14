@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html data-depth="2" data-lang="fr" lang="fr">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>L'IA est-elle utilisée dans les urgences et le triage en santé au Québec ? — Samuel Gareau-Lajoie</title>
+<meta content="Usage de l'IA dans les urgences et le triage clinique au Québec — état des lieux, outils existants, enjeux de sécurité et différences avec la médecine de première ligne." name="description"/>
+<link href="https://gareaulajoie.ca/answer-objects/ia-triage-urgence-sante-quebec/" rel="canonical"/>
+
+
+<meta content="L'IA est-elle utilisée dans les urgences et le triage en santé au Québec ? — Samuel Gareau-Lajoie" property="og:title"/>
+<meta content="Usage de l'IA dans les urgences et le triage clinique au Québec — état des lieux, outils existants, enjeux de sécurité et différences avec la médecine de première ligne." property="og:description"/>
+<meta content="https://gareaulajoie.ca/answer-objects/ia-triage-urgence-sante-quebec/" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="fr_CA" property="og:locale"/>
+<meta content="Samuel Gareau-Lajoie, MD" property="og:site_name"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="L'IA est-elle utilisée dans les urgences et le triage en santé au Québec ? — Samuel Gareau-Lajoie" name="twitter:title"/>
+<meta content="Usage de l'IA dans les urgences et le triage clinique au Québec — état des lieux, outils existants, enjeux de sécurité et différences avec la médecine de première ligne." name="twitter:description"/>
+<link href="https://gareaulajoie.ca/answer-objects/ia-triage-urgence-sante-quebec/" hreflang="fr" rel="alternate"/>
+<link href="https://gareaulajoie.ca/answer-objects/ia-triage-urgence-sante-quebec/" hreflang="en" rel="alternate"/>
+<link href="https://gareaulajoie.ca/answer-objects/ia-triage-urgence-sante-quebec/" hreflang="x-default" rel="alternate"/>
+</head><body>
+<div id="header-slot"></div>
+<main>
+<section class="page-hero">
+<div class="container">
+<div class="breadcrumb">
+<a href="/gareaulajoie-ca/"><span data-lang="fr">Accueil</span><span data-lang="en">Home</span></a>
+<span class="sep">/</span>
+<a href="../../answer-objects/index.html"><span data-lang="fr">Réponses cliniques</span><span data-lang="en">Clinical answers</span></a>
+<span class="sep">/</span>
+<span class="here">L'IA est-elle utilisée dans les urgences et le triage en san…</span>
+</div>
+<div class="eyebrow">
+Réponse clinique —
+<a href="../../piliers/audit-clinique-ia/index.html" style="color: inherit;"> Évaluation clinique IA </a> </div>
+<h1>L'IA est-elle utilisée dans les urgences et le triage en santé au Québec ?</h1>
+<p class="description">Usage de l'IA dans les urgences et le triage clinique au Québec — état des lieux, outils existants, enjeux de sécurité et différences avec la médecine de première ligne.</p>
+<div class="meta">
+<span><strong data-lang="fr">Publié le</strong><strong data-lang="en">Published</strong> 30 novembre 2025</span>
+<span><span data-lang="fr">Auteur :</span><span data-lang="en">Author:</span> <strong>Samuel Gareau-Lajoie, MD</strong></span>
+</div>
+</div>
+</section>
+<div class="article-layout">
+<aside class="article-toc">
+<div class="toc-label"><span data-lang="fr">Sur cette page</span><span data-lang="en">On this page</span></div>
+<ul><li><a href="#nuance-clinique">Nuance clinique</a></li><li><a href="#points-pratiques">Points pratiques</a></li><li><a href="#preuves-et-contexte-public">Preuves et contexte public</a></li></ul>
+</aside>
+<article class="article">
+<div class="lead-answer"><div class="lead-answer-label"><span data-lang="fr">Réponse courte</span><span data-lang="en">Short answer</span></div><p>L'INESSS evalue les technologies numeriques en sante selon un cadre de classification par risque, distinguant l'IA administrative (risque moindre) de l'IA diagnostique comme le triage (soumise a une reglementation stricte en raison des risques cliniques eleves).</p></div>
+<h2 class="section-h" data-n="01" id="nuance-clinique">Nuance clinique</h2>
+<p>Le triage clinique est l’une des tâches médicales où les biais algorithmiques ont le potentiel d’avoir les effets les plus inéquitables : si un modèle sous-estime systématiquement la gravité pour certains groupes de patients (par exemple, les femmes souffrant de douleur thoracique atypique, ou les patients issus de communautés sous-représentées dans les données d’entraînement), les conséquences peuvent être fatales. C’est précisément pour ça que les études de validation en urgence doivent impérativement inclure des analyses par sous-groupes — et pourquoi le déploiement sans supervision humaine n’est pas acceptable dans ce contexte.</p>
+<h2 class="section-h" data-n="02" id="points-pratiques">Points pratiques</h2>
+<p><strong>Applications IA documentées en urgence (contexte international, pertinence Québec) :</strong></p>
+<ul>
+<li><strong>Prédiction de sepsis</strong> : plusieurs modèles commerciaux (Epic Sepsis Model, Dascena) avec des performances variables selon les populations — certains déployés en milieu hospitalier québécois dans des projets pilotes</li>
+<li><strong>Imagerie urgente</strong> : détection IA de pneumothorax, fractures, AVC sur scanner — utilisée comme aide en radiologie urgente dans certains établissements</li>
+<li><strong>Priorisation dynamique</strong> : ajustement en temps réel de la priorisation triage basé sur les signes vitaux et antécédents — en développement ou pilote au Québec</li>
+<li><strong>Prédiction de flux</strong> : modèles de prédiction d’achalandage pour l’organisation des ressources — plus couramment déployés</li>
+</ul>
+<p><strong>Différences critiques avec la médecine de première ligne :</strong></p>
+<ul>
+<li>Délais de décision en urgence : minutes, pas jours → les erreurs algorithmiques ont moins de chances d’être interceptées</li>
+<li>Supervision humaine : toujours requise, mais la pression temporelle peut créer une automation bias (surconfiance dans la recommandation IA)</li>
+<li>Complexité des cas : les urgences voient les cas les plus atypiques — exactement ceux que les modèles entraînés sur des données “typiques” gèrent le moins bien</li>
+</ul>
+<p><strong>Ce que les urgentologues et infirmières de triage doivent savoir :</strong></p>
+<ul>
+<li>Un outil IA d’aide au triage n’est pas un remplacement du jugement clinique — c’est un signal supplémentaire</li>
+<li>Connaître les limites documentées de l’outil (population d’entraînement, taux d’erreur en sous-groupes) avant de lui faire confiance dans les cas limites</li>
+<li>Signaler les cas où l’outil a sous-estimé ou surestimé la gravité — c’est une donnée essentielle pour l’amélioration</li>
+</ul>
+<h2 class="section-h" data-n="03" id="preuves-et-contexte-public">Preuves et contexte public</h2>
+<ul>
+<li><a href="../../piliers/audit-clinique-ia/index.html">Évaluation clinique de l’IA — pilier</a></li>
+<li><a href="../../answer-objects/biais-algorithmiques-ia-sante-equite/index.html">Quels sont les biais algorithmiques en IA santé ?</a></li>
+</ul>
+<div class="grid-label">Pour aller plus loin</div><div class="related-grid"><a class="related-card" href="../../answer-objects/ia-diagnostic-medical-precision-limites/index.html"><div class="rc-kicker">Question · FAQ</div><div class="rc-title">L’IA peut-elle poser des diagnostics médicaux fiables ?</div></a><a class="related-card" href="../../answer-objects/evaluation-ia-outil-clinique-criteres/index.html"><div class="rc-kicker">Question · FAQ</div><div class="rc-title">Quels critères utiliser pour évaluer un outil IA clinique ?</div></a></div>
+<div class="external-sources" style="margin-top:2rem;padding:1.25rem 1.5rem;border:1px solid var(--border, #e0e0e0);border-radius:8px;background:var(--surface-2, #fafafa);">
+<h3 style="margin-top:0;font-size:1rem;"><span data-lang="fr">Sources institutionnelles</span><span data-lang="en">Institutional sources</span></h3>
+<ul>
+<li><a href="https://www.inesss.qc.ca" rel="noopener" target="_blank">INESSS - Classification par risque des technologies numeriques</a></li>
+<li><a href="https://www.quebec.ca/sante" rel="noopener" target="_blank">Sante Quebec - Cadre d'evaluation</a></li>
+</ul>
+</div>
+<div class="disclosure"><strong data-lang="fr">Disclosure.</strong><strong data-lang="en">Disclosure.</strong> Samuel Gareau-Lajoie est cofondateur de Vetted Medical. Cette réponse est éducative — l’état de déploiement des outils IA dans les urgences québécoises évolue rapidement, vérifier les sources institutionnelles pour l’état actuel.</div>
+</article>
+</div>
+</main>
+<div id="footer-slot"></div>
+<script src="/gareaulajoie-ca/authority-assets/partials.js"></script>
+<script src="/gareaulajoie-ca/authority-assets/site.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "L'IA est-elle utilisée dans les urgences et le triage en santé au Québec ?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "L'INESSS evalue les technologies numeriques en sante selon un cadre de classification par risque, distinguant l'IA administrative (risque moindre) de l'IA diagnostique comme le triage (soumise a une reglementation stricte en raison des risques cliniques eleves).",
+      "author": {
+        "@type": "Person",
+        "@id": "https://gareaulajoie.ca/#samuel-gareau-lajoie",
+        "name": "Samuel Gareau-Lajoie"
+      }
+    }
+  }],
+  "author": {
+    "@type": "Person",
+    "@id": "https://gareaulajoie.ca/#samuel-gareau-lajoie",
+    "name": "Samuel Gareau-Lajoie"
+  },
+  "url": "https://gareaulajoie.ca/answer-objects/ia-triage-urgence-sante-quebec/",
+  "inLanguage": "fr"
+}
+</script>
+</body></html>
