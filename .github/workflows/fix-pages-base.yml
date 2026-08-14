@@ -1,0 +1,79 @@
+name: Fix GitHub Pages preview base paths
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/fix-pages-base.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Rewrite preview URLs for project Pages path
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          root = Path('docs')
+          prefix = '/gareaulajoie-preview/'
+
+          # Root-absolute HTML links are correct for gareaulajoie.ca production,
+          # but GitHub project Pages serves this preview under /gareaulajoie-preview/.
+          attr = re.compile(r'((?:href|src|action|content)=["\'])/(?!/|gareaulajoie-preview/)')
+          for p in root.rglob('*.html'):
+              s = p.read_text(encoding='utf-8', errors='ignore')
+              s = attr.sub(lambda m: m.group(1) + prefix, s)
+              p.write_text(s, encoding='utf-8')
+
+          # Vite bundle contains root-absolute references to public assets.
+          asset_segments = (
+              'assets/', 'logos/', 'lovable-uploads/', 'downloads/', 'og/',
+              'authority-assets/', 'about/', 'talks/', 'piliers/', 'research/',
+              'authority/', 'selected-appearances/', 'media-kit/', 'podcasts/',
+              'projects/', 'credentials/', 'publications/', 'answer-objects/',
+              'llms.txt', '.well-known/'
+          )
+          for p in root.rglob('*.js'):
+              s = p.read_text(encoding='utf-8', errors='ignore')
+              for segment in asset_segments:
+                  for quote in ('"', "'", '`'):
+                      s = s.replace(f'{quote}/{segment}', f'{quote}{prefix}{segment}')
+              p.write_text(s, encoding='utf-8')
+
+          for p in root.rglob('*.css'):
+              s = p.read_text(encoding='utf-8', errors='ignore')
+              s = s.replace('url(/gareaulajoie-preview/', 'url(__ALREADY_PREFIXED__/')
+              s = s.replace('url(/', f'url({prefix}')
+              s = s.replace('url(__ALREADY_PREFIXED__/', 'url(/gareaulajoie-preview/')
+              p.write_text(s, encoding='utf-8')
+
+          # Preview must stay non-indexable.
+          (root / 'robots.txt').write_text('User-agent: *\nDisallow: /\n', encoding='utf-8')
+
+          index = (root / 'index.html').read_text(encoding='utf-8')
+          assert '/gareaulajoie-preview/assets/' in index
+          assert 'src="/assets/' not in index
+          assert 'href="/assets/' not in index
+          print('Preview base-path rewrite OK')
+          PY
+
+      - name: Commit corrected preview
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A docs
+          git commit -m "Fix preview paths for GitHub project Pages"
+          git push
