@@ -1,0 +1,45 @@
+name: Materialize exact live baseline preview
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/materialize-exact-live.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download exact-live validated artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --silent --show-error 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-2940-81f7-8640-46f1364c4a53/raw?se=2026-08-15T01%3A22%3A15Z&sp=r&sv=2026-02-06&sr=b&scid=bb5bc3cb-2429-51df-b75a-1c459010fd9b&skoid=864daabb-d06a-46b3-a747-d35075313a83&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-08-14T22%3A29%3A18Z&ske=2026-08-15T22%3A29%3A18Z&sks=b&skv=2026-02-06&sig=AyhsHu4BsmRCzDKpRx%2BZ%2BJiUgqn1jSbxPskxQrRtfTo%3D' -o preview.zip
+          rm -rf docs
+          mkdir docs
+          unzip -q preview.zip -d docs
+          test -f docs/index.html
+          test -f docs/en/index.html
+          test -f docs/assets/index-4wJP4A-p.js
+          test -f docs/images/hero-speaker.png
+          test -f docs/authority/index.html
+          grep -R -q 'IA Clinique' docs
+          grep -R -q '1000+ professionnels formés' docs
+          printf 'User-agent: *\nDisallow: /\n' > docs/robots.txt
+          touch docs/.nojekyll
+
+      - name: Commit exact-live static preview
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A docs
+          git commit -m "Align preview landing exactly with current production"
+          git push
