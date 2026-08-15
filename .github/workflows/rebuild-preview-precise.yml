@@ -1,0 +1,134 @@
+name: Rebuild preview with precise path patching
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/rebuild-preview-precise.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Restore pristine production landing bundles
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL 'https://gareaulajoie.ca/' -o docs/index.html
+          mkdir -p docs/en
+          curl -fsSL 'https://gareaulajoie.ca/en' -o docs/en/index.html
+
+          # Restore every captured production JS/CSS asset to pristine bytes.
+          for f in docs/assets/*; do
+            [ -f "$f" ] || continue
+            bn=$(basename "$f")
+            case "$bn" in
+              *.js|*.css)
+                if curl -fsSL "https://gareaulajoie.ca/assets/$bn" -o "$f.live"; then
+                  mv "$f.live" "$f"
+                else
+                  rm -f "$f.live"
+                fi
+                ;;
+            esac
+          done
+
+      - name: Apply precise preview-only path patches
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          PREFIX='/gareaulajoie-preview'
+          root=Path('docs')
+
+          # HTML: only resource-bearing attributes / JSON-LD image paths.
+          for p in [root/'index.html', root/'en/index.html']:
+              t=p.read_text(encoding='utf-8')
+              t=re.sub(r'(?P<a>\b(?:src|href)=["\'])/(?!/)', lambda m:m.group('a')+PREFIX+'/', t)
+              t=t.replace('"image": "/', '"image": "'+PREFIX+'/')
+              # Lovable analytics proxy is irrelevant on GitHub Pages and can 404 noisily.
+              t=re.sub(r'<script[^>]+~flock\.js[^>]*></script>', '', t)
+              p.write_text(t,encoding='utf-8')
+
+          # JS: restore pristine code, then patch only explicit app/resource paths.
+          for p in root.glob('assets/*.js'):
+              t=p.read_text(encoding='utf-8',errors='ignore')
+              # Resource paths are safe to prefix globally because they are not router grammar.
+              for stem in ('/images/','/logos/','/lovable-uploads/','/downloads/'):
+                  t=t.replace('"'+stem, '"'+PREFIX+stem)
+                  t=t.replace("'"+stem, "'"+PREFIX+stem)
+
+              if p.name == 'index-4wJP4A-p.js':
+                  # Exactly two app-level /en literals exist in the pristine bundle.
+                  t=t.replace('"/en"', '"'+PREFIX+'/en"')
+                  t=t.replace("'/en'", "'"+PREFIX+"/en'")
+
+                  # Patch only application-level home route / navigation patterns.
+                  t=t.replace('href:"/",className:"text-blue-500 hover:text-blue-700 underline",children:"Return to Home"',
+                              'href:"'+PREFIX+'/",className:"text-blue-500 hover:text-blue-700 underline",children:"Return to Home"')
+                  t=t.replace('i==="en"?"'+PREFIX+'/en"+n.hash:"/"+n.hash',
+                              'i==="en"?"'+PREFIX+'/en"+n.hash:"'+PREFIX+'/"+n.hash')
+                  t=t.replace('path:"/",element:m.jsx(ak,{})', 'path:"'+PREFIX+'/",element:m.jsx(ak,{})')
+
+                  # Preview must never register a service worker.
+                  t=re.sub(r'"serviceWorker"in navigator&&window\.addEventListener\("load",\(\)=>\{navigator\.serviceWorker\.register\("/sw\.js"\)\.catch\(\(\)=>\{\}\)\}\);', '', t)
+
+                  # Guard against the previous destructive rewrite.
+                  assert '.split("'+PREFIX+'/")' not in t
+                  assert '.split("/")' in t
+                  assert 'path:"'+PREFIX+'/",element:m.jsx(ak,{})' in t
+                  assert 'path:"'+PREFIX+'/en",element:m.jsx(mk,{})' in t
+              p.write_text(t,encoding='utf-8')
+
+          # CSS: absolute url(/...) values are resource paths, so prefix only those.
+          for p in root.glob('assets/*.css'):
+              t=p.read_text(encoding='utf-8',errors='ignore')
+              t=re.sub(r'url\((?P<q>["\']?)/(?!/)', lambda m:'url('+m.group('q')+PREFIX+'/', t)
+              p.write_text(t,encoding='utf-8')
+
+          # One-time cache-killer SW for anyone controlled by an older preview worker.
+          (root/'sw.js').write_text("self.addEventListener('install',()=>self.skipWaiting());self.addEventListener('activate',e=>e.waitUntil((async()=>{for(const k of await caches.keys())await caches.delete(k);await self.registration.unregister();const cs=await self.clients.matchAll({type:'window'});for(const c of cs)c.navigate(c.url);})()));",encoding='utf-8')
+          PY
+
+      - name: Validate locally with real Chrome under project subpath
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/serve-root
+          mkdir -p /tmp/serve-root
+          ln -s "$GITHUB_WORKSPACE/docs" /tmp/serve-root/gareaulajoie-preview
+          cd /tmp/serve-root
+          python3 -m http.server 8765 >/tmp/http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 1
+          CHROME=$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || command -v chromium-browser)
+          timeout 35s "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage \
+            --virtual-time-budget=10000 \
+            --dump-dom 'http://127.0.0.1:8765/gareaulajoie-preview/' \
+            > /tmp/rendered.html 2>/tmp/chrome.log
+          grep -Eqi 'IA Clinique|Adoption Responsable|1000\+|professionnels formés' /tmp/rendered.html || {
+            echo 'LOCAL RENDER FAILED'
+            grep -n '<div id="root"' /tmp/rendered.html || true
+            tail -100 /tmp/chrome.log || true
+            exit 1
+          }
+          echo 'Local project-path render OK'
+
+      - name: Commit precise preview fix
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs
+          git commit -m "Rebuild preview from pristine live bundles with precise path patching"
+          git push
