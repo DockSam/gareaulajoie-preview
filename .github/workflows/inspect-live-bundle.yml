@@ -1,0 +1,30 @@
+name: Inspect pristine live bundle
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/inspect-live-bundle.yml"
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch and inspect pristine production bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL 'https://gareaulajoie.ca/assets/index-4wJP4A-p.js' -o /tmp/live.js
+          python3 - <<'PY'
+          import re
+          from collections import Counter
+          t=open('/tmp/live.js',encoding='utf-8').read()
+          vals=[]
+          for m in re.finditer(r'(["\'])(/[^"\']*)\1', t):
+              vals.append(m.group(2))
+          c=Counter(vals)
+          for s,n in sorted(c.items(), key=lambda x:(x[0])):
+              if len(s) < 300:
+                  print(f'{n:4}  {s}')
+          print('TOTAL', len(vals), 'UNIQUE', len(c))
+          PY
