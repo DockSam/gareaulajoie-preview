@@ -31,16 +31,18 @@ jobs:
           set -euo pipefail
           CHROME=$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || command -v chromium-browser)
           echo "Using $CHROME"
-          "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage \
+          timeout 35s "$CHROME" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage \
             --virtual-time-budget=12000 \
-            --dump-dom 'https://docksam.github.io/gareaulajoie-preview/?headless=1' \
+            --dump-dom 'https://docksam.github.io/gareaulajoie-preview/?headless=2' \
             > /tmp/rendered.html 2>/tmp/chrome.log || { cat /tmp/chrome.log; exit 1; }
           grep -Eqi 'IA Clinique|Adoption Responsable|1000\+|professionnels formés' /tmp/rendered.html || {
             echo 'Expected rendered hero text not found.'
-            echo '--- DOM head ---'
-            head -c 6000 /tmp/rendered.html
+            echo '--- Root snippet ---'
+            grep -o '<div id="root"[^>]*>.*' /tmp/rendered.html | head -c 8000 || true
             echo '\n--- Chrome log ---'
             cat /tmp/chrome.log
             exit 1
           }
           echo 'Headless render OK'
+
+# rerun after precise live-bundle rebuild
