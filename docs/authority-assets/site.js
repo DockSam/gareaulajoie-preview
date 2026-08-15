@@ -24,10 +24,10 @@
   });
 
   // --- Active nav highlight ---
-  const path = location.pathname.replace(/\/index\.html$/, '/').replace(/\.html$/, '');
+  const path = location.pathname.replace(/\/index\.html$/, '/gareaulajoie-preview/').replace(/\.html$/, '');
   document.querySelectorAll('.site-nav a').forEach(a=>{
-    const href = a.getAttribute('href').replace(/\/index\.html$/, '/').replace(/\.html$/, '');
-    if (href === '/' && path === '/') a.classList.add('active');
-    else if (href !== '/' && path.startsWith(href.replace(/\/$/, ''))) a.classList.add('active');
+    const href = a.getAttribute('href').replace(/\/index\.html$/, '/gareaulajoie-preview/').replace(/\.html$/, '');
+    if (href === '/gareaulajoie-preview/' && path === '/gareaulajoie-preview/') a.classList.add('active');
+    else if (href !== '/gareaulajoie-preview/' && path.startsWith(href.replace(/\/$/, ''))) a.classList.add('active');
   });
 })();

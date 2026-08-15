@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dr Samuel Gareau-Lajoie | IA en santé - Transformez votre pratique médicale</title>
+  <meta name="description" content="Médecin de famille et expert IA. Conférences, conseils, formations. Réservez une rencontre.">
+    <meta name="author" content="Dr Samuel Gareau-Lajoie" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="canonical" href="https://gareaulajoie.ca/" />
+
+    <!-- Language alternates for SEO - distinct URLs -->
+    <link rel="alternate" hreflang="fr" href="https://gareaulajoie.ca/" />
+    <link rel="alternate" hreflang="en" href="https://gareaulajoie.ca/en" />
+    <link rel="alternate" hreflang="x-default" href="https://gareaulajoie.ca/" />
+
+    <!-- SEO Keywords -->
+    <meta name="keywords" content="IA en santé, intelligence artificielle médicale, conférencier santé numérique, AI healthcare speaker, médecin conférencier, scribe IA, EBM AI, Samuel Gareau-Lajoie" />
+
+    <!-- Preload LCP hero image for faster rendering -->
+    <link rel="preload" as="image" href="/images/hero-speaker.png" fetchpriority="high" />
+
+    <!-- Fonts - non-blocking with preload + dns-prefetch fallback -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;700&family=Montserrat:wght@600;700&display=swap" />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet" /></noscript>
+
+    <!-- Preconnect to Typeform for faster embed loading -->
+    <link rel="preconnect" href="https://embed.typeform.com" />
+
+    <!-- Open Graph / Twitter -->
+    
+    
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://gareaulajoie.ca/" />
+    <meta property="og:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/EMugQH8CBhNyiN2qfdHePfBZf5c2/social-images/social-1767525368412-ChatGPT Image Jan 1, 2026, 09_39_46 AM.png">
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/EMugQH8CBhNyiN2qfdHePfBZf5c2/social-images/social-1767525368412-ChatGPT Image Jan 1, 2026, 09_39_46 AM.png">
+
+    <!-- Schema.org Person -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Dr Samuel Gareau-Lajoie",
+        "jobTitle": "Conférencier IA en santé",
+        "image": "/lovable-uploads/47155981-d3a9-4925-ac80-d42fc8152cb0.png",
+        "description": "Médecin clinicien & leader en santé numérique. Conférences claires et applicables (scribes IA, EBM & IA, éthique, adoption).",
+        "url": "https://gareaulajoie.ca/",
+        "sameAs": ["https://www.linkedin.com/in/sglmd/"]
+      }
+    </script>
+
+    <!-- GA4 - Renseignez votre ID pour activer -->
+    <script>
+      window.GA_MEASUREMENT_ID = ""; // ex: G-XXXXXXX
+    </script>
+    <meta property="og:title" content="Dr Samuel Gareau-Lajoie | IA en santé - Transformez votre pratique médicale">
+  <meta name="twitter:title" content="Dr Samuel Gareau-Lajoie | IA en santé - Transformez votre pratique médicale">
+  <meta property="og:description" content="Médecin de famille et expert IA. Conférences, conseils, formations. Réservez une rencontre.">
+  <meta name="twitter:description" content="Médecin de famille et expert IA. Conférences, conseils, formations. Réservez une rencontre.">
+  <script type="module" crossorigin src="/assets/index-4wJP4A-p.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-C5ea8VX-.css">
+<script defer src="/~flock.js" data-proxy-url="/~api/analytics"></script></head>
+
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

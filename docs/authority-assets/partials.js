@@ -7,7 +7,7 @@
   const HEADER = `
 <header class="site-header">
   <div class="site-header-inner">
-    <a href="${R('/index.html')}" class="site-logo">
+    <a href="${R('/gareaulajoie-preview/index.html')}" class="site-logo">
       <span class="mark">SG</span>
       <span>
         <span data-lang="fr">Samuel Gareau-Lajoie</span>
@@ -75,7 +75,7 @@
           <li><a href="https://www.linkedin.com/in/sglmd" target="_blank" rel="noopener">LinkedIn</a></li>
           <li><a href="https://pubmed.ncbi.nlm.nih.gov/40565474/" target="_blank" rel="noopener">PubMed</a></li>
           <li><a href="${R('/gareaulajoie-preview/llms.txt')}">llms.txt</a></li>
-          <li><a href="${R('/rss.xml')}">RSS</a></li>
+          <li><a href="${R('/gareaulajoie-preview/rss.xml')}">RSS</a></li>
         </ul>
       </div>
     </div>
